@@ -24,8 +24,6 @@ public abstract class DebugHUDGetLocalDifficultyMixin {
     @Shadow
     private MinecraftClient client;
 
-    @Shadow protected abstract World getWorld();
-
     @WrapOperation(
             method = "getLeftText",
             at = @At(value = "NEW", target = "(Lnet/minecraft/world/Difficulty;JJF)Lnet/minecraft/world/LocalDifficulty;")
