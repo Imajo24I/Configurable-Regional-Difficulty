@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 import static net.configurable_regional_difficulty.majo24.ConfigurableRegionalDifficulty.configManager;
 
 public class NetworkingHandler {
-    public static final Identifier CRD_ADD_SELECTION_ID = new Identifier(ConfigurableRegionalDifficulty.MOD_ID, "crd_circle_selection");
+    public static final Identifier CRD_ADD_SELECTION_ID = new Identifier(ConfigurableRegionalDifficulty.MOD_ID, "crd_add_selection");
     public static final Identifier CRD_REMOVE_SELECTION_ID = new Identifier(ConfigurableRegionalDifficulty.MOD_ID, "crd_remove_selection");
     public static final Identifier CRD_REQUEST_SELECTION_ID = new Identifier(ConfigurableRegionalDifficulty.MOD_ID, "crd_request_selection");
     public static final Identifier CRD_RECEIVED_REQUEST_FEEDBACK = new Identifier(ConfigurableRegionalDifficulty.MOD_ID, "crd_received_request_feedback");
