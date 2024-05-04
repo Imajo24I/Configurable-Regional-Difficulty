@@ -25,7 +25,6 @@ public class ConfigurableRegionalDifficulty implements ModInitializer {
 		NetworkingHandler.initMain();
 	}
 
-
 	public static void loadConfig(MinecraftServer world, ServerWorld serverWorld) {
 		Path path = world.getSavePath(WorldSavePath.ROOT).resolve("data/" + MOD_ID + "-config.json");
 		configManager = new ConfigManager(ConfigManager.getConfigFromFile(path), path);

@@ -30,7 +30,7 @@ public abstract class DebugHUDGetLocalDifficultyMixin {
     public LocalDifficulty testLocalDifficulty(Difficulty difficulty, long timeOfDay, long inhabitedTime, float moonSize, Operation<LocalDifficulty> original) {
         ChunkPos chunkPos = new ChunkPos(Objects.requireNonNull(client.getCameraEntity()).getBlockPos());
 
-        if (!ConfigurableRegionalDifficulty.configManager.receivedSelectionList) {
+        if (!ConfigurableRegionalDifficulty.configManager.hasReceivedSelectionList()) {
              return original.call(difficulty, timeOfDay, inhabitedTime, moonSize);
         }
 

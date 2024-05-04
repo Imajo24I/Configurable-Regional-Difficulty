@@ -14,7 +14,7 @@ import java.util.List;
 public class ConfigManager {
     private final Config config;
     public final Path configPath;
-    public boolean receivedSelectionList = false;
+    private boolean receivedSelectionList = false;
 
     public static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_DASHES)
                 .setPrettyPrinting()
@@ -74,5 +74,13 @@ public class ConfigManager {
      */
     public boolean removeSelection(Selection selection) {
         return config.removeSelection(selection);
+    }
+
+    public boolean hasReceivedSelectionList() {
+        return receivedSelectionList;
+    }
+
+    public void setHasReceivedSelectionList(boolean receivedSelectionList) {
+        this.receivedSelectionList = receivedSelectionList;
     }
 }

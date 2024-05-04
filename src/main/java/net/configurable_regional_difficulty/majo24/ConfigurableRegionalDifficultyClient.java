@@ -25,7 +25,7 @@ public class ConfigurableRegionalDifficultyClient implements ClientModInitialize
             NetworkingHandler.requestSelectionList();
         } else {
             ConfigurableRegionalDifficulty.configManager = new ConfigManager(new Config(), server.getServer().getSavePath(WorldSavePath.ROOT).resolve("data/" + ConfigurableRegionalDifficulty.MOD_ID + "-config.json"));
-            ConfigurableRegionalDifficulty.configManager.receivedSelectionList = true;
+            ConfigurableRegionalDifficulty.configManager.setHasReceivedSelectionList(true);
         }
     }
 }

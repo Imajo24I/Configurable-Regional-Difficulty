@@ -28,7 +28,7 @@ public class NetworkingHandler {
     public static void initClient() {
             ClientPlayNetworking.registerGlobalReceiver(NetworkingHandler.CRD_ADD_SELECTION_ID, (client, server, buf, responseSender) -> NetworkingHandler.addSelection(buf));
             ClientPlayNetworking.registerGlobalReceiver(NetworkingHandler.CRD_REMOVE_SELECTION_ID, (client, server, buf, responseSender) -> NetworkingHandler.removeSelection(buf));
-            ClientPlayNetworking.registerGlobalReceiver(NetworkingHandler.CRD_RECEIVED_REQUEST_FEEDBACK, (client, server, buf, responseSender) -> configManager.receivedSelectionList = true);
+            ClientPlayNetworking.registerGlobalReceiver(NetworkingHandler.CRD_RECEIVED_REQUEST_FEEDBACK, (client, server, buf, responseSender) -> configManager.setHasReceivedSelectionList(true));
 
     }
 
