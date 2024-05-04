@@ -3,11 +3,9 @@ package net.configurable_regional_difficulty.majo24.config.selection;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.math.ChunkPos;
 
-import java.util.ArrayList;
-
 public class RectangleSelection implements Selection {
-    public ChunkPos startingChunkPos;
-    public ChunkPos endingChunkPos;
+    private final ChunkPos startingChunkPos;
+    private final ChunkPos endingChunkPos;
 
     public RectangleSelection(ChunkPos startingChunkPos, ChunkPos endingChunkPos) {
         this.startingChunkPos = startingChunkPos;
