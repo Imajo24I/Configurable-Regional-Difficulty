@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Config {
     private final ArrayList<Selection> selections;
-
     public Config() {
         selections = new ArrayList<>();
     }

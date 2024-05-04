@@ -2,6 +2,7 @@ package net.configurable_regional_difficulty.majo24.config;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import net.configurable_regional_difficulty.majo24.NetworkingHandler;
 import net.configurable_regional_difficulty.majo24.config.selection.CircleSelection;
 import net.configurable_regional_difficulty.majo24.config.selection.RectangleSelection;
 import net.configurable_regional_difficulty.majo24.config.selection.Selection;
@@ -59,10 +60,12 @@ public class Commands {
 										int x = IntegerArgumentType.getInteger(context, "Center chunk x");
 										int z = IntegerArgumentType.getInteger(context, "Center chunk z");
 										int radius = IntegerArgumentType.getInteger(context, "Radius");
+										CircleSelection selection = new CircleSelection(new ChunkPos(x, z), radius);
 
-										configManager.addSelection(new CircleSelection(new ChunkPos(x, z), radius));
-										configManager.saveConfig();
+										configManager.addSelection(selection);
 										context.getSource().sendFeedback(() -> Text.literal("Added circle selection at Chunk " + x + " " + z + " with radius " + radius), true);
+										configManager.saveConfig();
+										NetworkingHandler.sendAddSelection(selection, context.getSource().getServer());
 										return 1;
 									})))))
 							.then(literal("rectangle")
@@ -75,11 +78,12 @@ public class Commands {
 										int startChunkZ = IntegerArgumentType.getInteger(context, "Bottom left chunk z");
 										int endChunkX = IntegerArgumentType.getInteger(context, "Top right chunk x");
 										int endChunkZ = IntegerArgumentType.getInteger(context, "Top right chunk z");
+										RectangleSelection selection = new RectangleSelection(new ChunkPos(startChunkX, startChunkZ), new ChunkPos(endChunkX, endChunkZ));
 
-										configManager.addSelection(new RectangleSelection(new ChunkPos(startChunkX, startChunkZ), new ChunkPos(endChunkX, endChunkZ)));
-										configManager.saveConfig();
+										configManager.addSelection(selection);
 										context.getSource().sendFeedback(() -> Text.literal("Added rectangle selection from Chunk " + startChunkX + " " + startChunkZ + " to Chunk " + endChunkX + " " + endChunkZ), true);
-
+										configManager.saveConfig();
+										NetworkingHandler.sendAddSelection(selection, context.getSource().getServer());
 										return 1;
 									})))))))
 					.then(literal("remove").executes(context -> {
@@ -94,9 +98,13 @@ public class Commands {
 										int x = IntegerArgumentType.getInteger(context, "Center chunk x");
 										int z = IntegerArgumentType.getInteger(context, "Center chunk z");
 										int radius = IntegerArgumentType.getInteger(context, "Radius");
-										boolean successfullyRemoved = configManager.removeSelection(new CircleSelection(new ChunkPos(x, z), radius));
+										CircleSelection selection = new CircleSelection(new ChunkPos(x, z), radius);
+
+										boolean successfullyRemoved = configManager.removeSelection(selection);
                                         if (successfullyRemoved) {
                                             context.getSource().sendFeedback(() -> Text.literal("Successfully removed circle selection at Chunk " + x + " " + z + " with radius " + radius), true);
+											configManager.saveConfig();
+											NetworkingHandler.sendRemoveSelection(selection, context.getSource().getServer());
                                         } else {
                                             context.getSource().sendFeedback(() -> Text.literal("Failed to remove circle selection at Chunk " + x + " " + z + " with radius " + radius + "\nMost likely caused by the selection not existing"), false);
                                         }
@@ -112,9 +120,13 @@ public class Commands {
 										int startChunkZ = IntegerArgumentType.getInteger(context, "Bottom left chunk z");
 										int endChunkX = IntegerArgumentType.getInteger(context, "Top right chunk x");
 										int endChunkZ = IntegerArgumentType.getInteger(context, "Top right chunk z");
-										boolean successfullyRemoved = configManager.removeSelection(new RectangleSelection(new ChunkPos(startChunkX, startChunkZ), new ChunkPos(endChunkX, endChunkZ)));
+										RectangleSelection selection = new RectangleSelection(new ChunkPos(startChunkX, startChunkZ), new ChunkPos(endChunkX, endChunkZ));
+
+										boolean successfullyRemoved = configManager.removeSelection(selection);
                                         if (successfullyRemoved) {
                                             context.getSource().sendFeedback(() -> Text.literal("Successfully removed rectangle selection from Chunk " + startChunkX + " " + startChunkZ + " to Chunk " + endChunkX + " " + endChunkZ), true);
+											configManager.saveConfig();
+											NetworkingHandler.sendRemoveSelection(selection, context.getSource().getServer());
                                         } else {
                                             context.getSource().sendFeedback(() -> Text.literal("Failed to remove rectangle selection from Chunk " + startChunkX + " " + startChunkZ + " to Chunk " + endChunkX + " " + endChunkZ + "\nMost likely caused by selection not existing"), false);
                                         }

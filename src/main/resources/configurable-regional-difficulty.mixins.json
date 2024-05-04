@@ -2,10 +2,12 @@
 	"required": true,
 	"package": "net.configurable_regional_difficulty.majo24.mixin",
 	"compatibilityLevel": "JAVA_17",
+	"client": [
+		"DebugHUDGetLocalDifficultyMixin"
+	],
 	"mixins": [
 		"WorldGetLocalDifficultyMixin",
-		"ChunkRegionGetLocalDifficultyMixin",
-		"DebugHUDGetLocalDifficultyMixin"
+		"ChunkRegionGetLocalDifficultyMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

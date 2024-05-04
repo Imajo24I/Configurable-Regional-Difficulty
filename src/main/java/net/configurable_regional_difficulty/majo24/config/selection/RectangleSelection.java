@@ -1,6 +1,9 @@
 package net.configurable_regional_difficulty.majo24.config.selection;
 
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.math.ChunkPos;
+
+import java.util.ArrayList;
 
 public class RectangleSelection implements Selection {
     public ChunkPos startingChunkPos;
@@ -19,5 +22,12 @@ public class RectangleSelection implements Selection {
     @Override
     public String getSelection() {
         return "Type: rectangle, from Chunk " + startingChunkPos.x +  " " + startingChunkPos.z + " to Chunk " + endingChunkPos.x + " " + endingChunkPos.z;
+    }
+
+    @Override
+    public void addSelectionToBuffer(PacketByteBuf buf) {
+        buf.writeString("rectangle");
+        buf.writeChunkPos(startingChunkPos);
+        buf.writeChunkPos(endingChunkPos);
     }
 }

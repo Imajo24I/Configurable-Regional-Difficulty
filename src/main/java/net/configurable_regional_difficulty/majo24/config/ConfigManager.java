@@ -14,12 +14,12 @@ import java.util.List;
 public class ConfigManager {
     private final Config config;
     public final Path configPath;
+    public boolean receivedSelectionList = false;
 
     public static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_DASHES)
                 .setPrettyPrinting()
                 .registerTypeAdapter(Selection.class, new CustomSelectionSerializer())
                 .create();
-
 
     public ConfigManager(Config config, Path path) {
         this.config = config;
@@ -73,10 +73,6 @@ public class ConfigManager {
     @return True if removal was successful
      */
     public boolean removeSelection(Selection selection) {
-        System.out.println(selection.getSelection());
-
-        boolean successfullyRemoved = config.removeSelection(selection);
-        this.saveConfig();
-        return successfullyRemoved;
+        return config.removeSelection(selection);
     }
 }

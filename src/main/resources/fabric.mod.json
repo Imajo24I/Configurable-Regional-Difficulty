@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"main": [
 			"net.configurable_regional_difficulty.majo24.ConfigurableRegionalDifficulty"
+		],
+		"client": [
+			"net.configurable_regional_difficulty.majo24.ConfigurableRegionalDifficultyClient"
 		]
 	},
 	"mixins": [
