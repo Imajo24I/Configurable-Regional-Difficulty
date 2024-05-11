@@ -10,9 +10,6 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.util.WorldSavePath;
 
 public class ConfigurableRegionalDifficultyClient implements ClientModInitializer {
-    /**
-     * Runs the mod initializer on the client environment.
-     */
     @Override
     public void onInitializeClient() {
         NetworkingHandler.initClient();

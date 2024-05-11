@@ -28,7 +28,7 @@ public abstract class DebugHUDGetLocalDifficultyMixin {
             at = @At(value = "NEW", target = "(Lnet/minecraft/world/Difficulty;JJF)Lnet/minecraft/world/LocalDifficulty;")
     )
     public LocalDifficulty testLocalDifficulty(Difficulty difficulty, long timeOfDay, long inhabitedTime, float moonSize, Operation<LocalDifficulty> original) {
-        ChunkPos chunkPos = new ChunkPos(Objects.requireNonNull(client.getCameraEntity()).getBlockPos());
+        ChunkPos chunkPos = new ChunkPos(client.getCameraEntity().getBlockPos());
 
         if (!ConfigurableRegionalDifficulty.configManager.hasReceivedSelectionList()) {
              return original.call(difficulty, timeOfDay, inhabitedTime, moonSize);
